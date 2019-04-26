@@ -838,10 +838,10 @@ class WorkflowController(BaseUIController, SharableMixin, UsesStoredWorkflowMixi
 
                 writer += "- Tool parameters:\n"
                 # Split on comma unless that comma is in []
-                split_value = (re.split(r',\s*(?![^[]]*\))', str(value['tool_state'])))
+                split_value = (re.split(r',\s*(?![^[]]*\))', str(value['tool_state']))) # Doesn't appear to be working
                 for param in split_value:  # Write all tool parameters except ones excluded right below
                     if "null" not in param and 'chromInfo' not in param and '__workflow' not in param:
-                        bad_chars = '{}\'\\[]"'  # Unwanted characters that are stuck to the string from its extraction
+                        bad_chars = '{}\'\\[]\"'  # Unwanted characters that are stuck to the string from its extraction
                         for c in bad_chars:
                             param = param.replace(c, "")
                         writer += "   * {}\n".format(param.strip())
